@@ -58,32 +58,29 @@ def show_plot(chromosoms, wskazniki, procents):
     plt.title("Procentowy udział chromosomów\n\n")
     plt.show()
 
-def select_parents(chromosoms, wskazniki):
-    temp = []
+def select_parents(chromosomy, wskazniki):
     rodzice = {}
 
-    suma_prob = sum(wskazniki)
-    zaokraglona_suma_prob = round(suma_prob, 2)
+    liczba_chromosomow = len(chromosomy)
+    liczba_rodzicow_do_wyboru = round(0.3 * liczba_chromosomow)
 
-    while len(temp) < 2:
-        losowy_punkt = random.uniform(0, zaokraglona_suma_prob)
+    while len(rodzice) < liczba_rodzicow_do_wyboru:
+        losowy_punkt = random.uniform(0, sum(wskazniki))
         suma_prob = 0
-        for i in range(len(chromosoms)):
+
+        for i, chromosom in enumerate(chromosomy):
             suma_prob += wskazniki[i]
             if suma_prob >= losowy_punkt:
-                chromosom = chromosoms[i]
-                temp.append(chromosom)
                 rodzice[chromosom] = rodzice.get(chromosom, 0) + 1
 
-    wybrane_chromosomy = list(rodzice.keys())
-    return wybrane_chromosomy, rodzice
-
+    wybrani_rodzice = list(rodzice.keys())
+    return wybrani_rodzice, rodzice
 
 def krzyzowanie(chromosoms, pula_rodzicielska):
     pk = 0.75
     wsk_krzyzowania = [random.uniform(0, 1) for _ in range(len(pula_rodzicielska))]
 
-    for i in range(0, len(pula_rodzicielska), 2):
+    for i in range(0, len(pula_rodzicielska)-2, 2):
         rodzic1 = pula_rodzicielska[i]
         rodzic2 = pula_rodzicielska[i + 1]
 
