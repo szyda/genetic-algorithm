@@ -72,7 +72,7 @@ def crossover(population_size, parents, pk):
 def mutation(population_size, children, pm):
     for i in range(population_size):
         if random.uniform(0, 1) <= pm:
-            mutation_point = random.randint(0, 7)
+            mutation_point = random.randint(0, calculate_chromosome_lenght() - 1)
             if children[i][mutation_point] == 1:
                 children[i][mutation_point] = 0
             else:
