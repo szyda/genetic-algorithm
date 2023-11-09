@@ -17,11 +17,6 @@ def generate_chromosomes(size_of_population):
 def calculate_function_value(x):
     return (0.2 * math.pow(float(x), 0.5) + 2 * math.sin(float(2 * math.pi * 0.02 * float(x))) + 5)
 
-# def calculate_roulette(function_values):
-#     sum_of_function_values = sum(function_values)
-#     fittnes_of_chromosome = [round(y / sum_of_function_values * 100, 2) for y in function_values]
-#     sum_of_fittnes = sum(fittnes_of_chromosome)
-
 def calculate_chromosome_lenght():
     domain = 255 * pow(10, 5) # dziedzina * 10 do precyzji (ciekawe czemu)
     power = 0
@@ -29,6 +24,13 @@ def calculate_chromosome_lenght():
         power += 1
 
     return power
+
+def calculate_roulette(function_values):
+    sum_of_function_values = sum(function_values)
+    fittnes_of_chromosome = [round(y / sum_of_function_values * 100, 2) for y in function_values]
+    sum_of_fittnes = sum(fittnes_of_chromosome)
+
+    return sum_of_fittnes, fittnes_of_chromosome
 
 def binary_to_decimal(binary_number):
     return sum(val * (2 ** idx) for idx, val in enumerate(reversed(binary_number)))
@@ -101,9 +103,7 @@ def genetic_algorithm(pk, pm, population_size, number_of_generations):
             y = calculate_function_value(x)
             function_values.append(y)
 
-        sum_of_function_values = sum(function_values)
-        fittnes_of_chromosome = [round(y / sum_of_function_values * 100, 2) for y in function_values]
-        sum_of_fittnes = sum(fittnes_of_chromosome)
+        sum_of_fittnes, fittnes_of_chromosome = calculate_roulette(function_values)
 
         parents = choose_parents(population_size, population, sum_of_fittnes, fittnes_of_chromosome)
         children = crossover(population_size, parents, pk)
