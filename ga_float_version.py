@@ -19,6 +19,10 @@ def calculate_chromosome_lenght():
     while not (pow(2, power) <= domain and domain <= pow(2, power + 1)):
         power += 1
 
+    power += 1
+    print("\n")
+    print("Power: ", power)
+    print("\n")
     return power
 
 def calculate_roulette(function_values):
