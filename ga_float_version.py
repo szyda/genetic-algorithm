@@ -118,53 +118,26 @@ def genetic_algorithm(pk, pm, population_size, number_of_generations):
 
     return adaptation_values, max_fittnes
 
-# def show_result(ch, dec_values, wsk_przystosowania):
-#     print("Chromosom | Wartosc funkcji | Wskaznik przystosowania")
-#     for i in range(len(ch)):
-#         print(ch[i], "  " ,dec_values[i], "           " , wsk_przystosowania[i])
-
-# def show_pie_plot(chromosoms, wskazniki, procents):
-#     colors = [plt.cm.viridis(random.random()) for _ in range(len(chromosoms))]
-#     plt.figure(figsize=(14, 8))
-#     plt.pie(procents, labels=chromosoms, colors=colors, autopct='%1.3f%%', startangle=140)
-#     plt.legend(chromosoms, title="Chromosomy", loc="center left", bbox_to_anchor=(1, 0.5))
-#     plt.axis('equal')
-#     plt.title("Procentowy udział chromosomów\n\n")
-#     plt.show()
-
 def main():
     pk_values = [0.5, 0.6, 0.7, 0.8, 0.9, 1]
     pm_values = [0.0, 0.01, 0.06, 0.1, 0.2, 0.3, 0.5]
     population_size = 200
     number_of_generations = 200
 
-    # for pm in pm_values:
-    #     plt.figure(figsize=(10, 6))
-    #
-        # for pk in pk_values:
-        #     adaptation_values, max_fittnes = genetic_algorithm(pk, pm, population_size, number_of_generations)
-        #     print(f'pk={pk}, pm={pm}:', max_fittnes)
-        #
-        #     plt.plot(adaptation_values, label=f'pk={pk}')
-        #
-        # plt.title(f"Genetic algorithm for pm={pm}")
-        # plt.xlabel("Generations")
-        # plt.ylabel("Adaptation value")
-        # plt.legend()
-        # plt.show()
+    for pm in pm_values:
+        plt.figure(figsize=(10, 6))
 
-    pm = 0.5
-    for pk in pk_values:
-        adaptation_values, max_fittnes = genetic_algorithm(pk, pm, population_size, number_of_generations)
-        print(f'pk={pk}, pm={pm}:', max_fittnes)
+        for pk in pk_values:
+            adaptation_values, max_fittnes = genetic_algorithm(pk, pm, population_size, number_of_generations)
+            print(f'pk={pk}, pm={pm}:', round(max_fittnes, 4))
 
-        plt.plot(adaptation_values, label=f'pk={pk}')
+            plt.plot(adaptation_values, label=f'pk={pk}')
 
-    plt.title(f"Genetic algorithm for pm={pm}")
-    plt.xlabel("Generations")
-    plt.ylabel("Adaptation value")
-    plt.legend()
-    plt.show()
+        plt.title(f"Genetic algorithm for pm={pm}")
+        plt.xlabel("Generations")
+        plt.ylabel("Adaptation value")
+        plt.legend()
+        plt.show()
 
 
 main()
