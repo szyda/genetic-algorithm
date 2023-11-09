@@ -3,10 +3,6 @@ import math
 import numpy as np
 import matplotlib.pyplot as plt
 
-# f(x) = 0.2*x(1/2) + 2*sin(2*pi*0.02x)+5
-# x >= 0 x <= 255
-# f_max(x) = 9.916
-
 def generate_chromosomes(size_of_population):
     chromosomes = []
     chromosome_lenght = calculate_chromosome_lenght()
@@ -18,7 +14,7 @@ def calculate_function_value(x):
     return (0.2 * math.pow(float(x), 0.5) + 2 * math.sin(float(2 * math.pi * 0.02 * float(x))) + 5)
 
 def calculate_chromosome_lenght():
-    domain = 255 * pow(10, 5) # dziedzina * 10 do precyzji (ciekawe czemu)
+    domain = 255 * pow(10, 5)
     power = 0
     while not (pow(2, power) <= domain and domain <= pow(2, power + 1)):
         power += 1
